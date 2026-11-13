@@ -1,4 +1,4 @@
-#Kurim Mystery - Interaktivní AI Detektivka
+# Kurim Mystery - Interaktivní AI Detektivka
 
 Tento projekt byl vytvořen jako maturitní projekt do předmětu operační systémy.
 
@@ -14,7 +14,7 @@ Tento projekt byl vytvořen jako maturitní projekt do předmětu operační sys
 
 ---
 
-## 📸 Ukázky z aplikace
+## Ukázky z aplikace
 
 ### Hlavní výslechová místnost
 ![Výslechová místnost](static/screenshots/interrogation.png)
@@ -31,7 +31,7 @@ Tento projekt byl vytvořen jako maturitní projekt do předmětu operační sys
 > **Oběť:** **Viktor Černý** (CEO) — nalezen mrtvý v noci v serverovně, uškrcený ethernetovým kabelem.  
 > **Pozadí případu:** Viktor Černý vybudoval úspěšný AI startup, ale krátce před smrtí oznámil plán prodat celou společnost velké korporaci a po akvizici propustit většinu týmu. Každý z přítomných měl silný motiv.
 
-### 👥 Podezřelí
+### Podezřelí
 
 | ID | Jméno | Role ve firmě | Charakteristika a motiv |
 | :--- | :--- | :--- | :--- |
@@ -41,7 +41,7 @@ Tento projekt byl vytvořen jako maturitní projekt do předmětu operační sys
 
 ---
 
-## ✨ Klíčové funkce
+## Klíčové funkce
 
 - **Dynamické AI výslechy v přirozeném jazyce:** Postavy odpovídají česky v první osobě bez rušivých roleplay poznámek, drží se své povahy a znají vzájemné vztahy.
 - **Perzistentní paměť rozhovorů:** Veškerá historie zpráv pro každou postavu se ukládá do relační databáze PostgreSQL a při každém dalším dotazu se předává LLM modelu jako kontext.
@@ -52,7 +52,7 @@ Tento projekt byl vytvořen jako maturitní projekt do předmětu operační sys
 
 ---
 
-## 📂 Struktura projektu
+## Struktura projektu
 
 ```text
 AiDetectiveFull/
@@ -130,7 +130,7 @@ Projekt podporuje jak **OpenAI API**, tak jakýkoliv **OpenAI-kompatibilní serv
 
 ---
 
-## ⚙️ Konfigurační proměnné (`.env`)
+## Konfigurační proměnné (`.env`)
 
 | Proměnná | Výchozí hodnota | Popis |
 | :--- | :--- | :--- |
@@ -143,7 +143,7 @@ Projekt podporuje jak **OpenAI API**, tak jakýkoliv **OpenAI-kompatibilní serv
 
 ---
 
-## 🔌 Přehled REST API Endpointů
+## Přehled REST API Endpointů
 
 FastAPI automaticky generuje interaktivní OpenAPI dokumentaci dostupnou na `/docs` (Swagger UI) a `/redoc`.
 
@@ -158,7 +158,7 @@ FastAPI automaticky generuje interaktivní OpenAPI dokumentaci dostupnou na `/do
 
 ---
 
-## 🛠️ Použité technologie
+## Použité technologie
 
 - **Backend:** [FastAPI](https://fastapi.tiangolo.com/), [Uvicorn](https://www.uvicorn.org/), Python 3.12
 - **Databáze & ORM:** [PostgreSQL 16](https://www.postgresql.org/), [SQLAlchemy 2.0](https://www.sqlalchemy.org/), `psycopg` (v3)
