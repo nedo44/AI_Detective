@@ -1,6 +1,8 @@
-# Kurim Mystery - Interaktivní AI Detektivka
+# Kurim Mystery - Interactive AI Detective Game
 
-Tento projekt byl vytvořen jako maturitní projekt do předmětu operační systémy.
+[![Zobrazit README v češtině](https://img.shields.io/badge/%F0%9F%87%A8%F0%9F%87%BF_%C4%8Cesky-Zobrazit_README_v_%C4%8CJ-2563EB?style=for-the-badge)](README.cs.md)
+
+This project was created as a high school graduation (*maturita*) project for the Operating Systems course.
 
 ![Python](https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688?style=for-the-badge&logo=fastapi&logoColor=white)
@@ -10,158 +12,158 @@ Tento projekt byl vytvořen jako maturitní projekt do předmětu operační sys
 ![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 ![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-UI-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
 
-**Kurim Mystery** je plnohodnotná webová konverzační detektivní hra poháněná velkými jazykovými modely (LLM). Hráč se ujímá role vyšetřovatele a v reálném čase vyslýchá trojici podezřelých v případu vraždy zakladatele technologického startupu **Nexus AI**. Každá postava má vlastní osobnost, historii, motiv, alibi i tajemství definované propracovaným systémovým promptem a pamatuje si celý kontext probíhajícího výslechu v databázi PostgreSQL.
+**Kurim Mystery** is a full-featured web-based conversational detective game powered by Large Language Models (LLMs). The player takes on the role of an investigator and interrogates three suspects in real time in the murder case of the founder of the tech startup **Nexus AI**. Each character has their own personality, backstory, motive, alibi, and secrets defined by a detailed system prompt, and remembers the entire context of the ongoing interrogation in a PostgreSQL database.
 
 ---
 
-## Ukázky z aplikace
+## Application Screenshots
 
-### Hlavní výslechová místnost
-![Výslechová místnost](static/screenshots/interrogation.png)
+### Main Interrogation Room
+![Interrogation Room](static/screenshots/interrogation.png)
 
-| Informace o oběti | Profil podezřelého | Vyhodnocení obvinění (Rozsudek) |
+| Victim Information | Suspect Profile | Accusation Evaluation (Verdict) |
 | :---: | :---: | :---: |
-| ![O oběti](static/screenshots/victim_modal.png) | ![Profil postavy](static/screenshots/profile_modal.png) | ![Vítězství](static/screenshots/verdict_victory.png) |
+| ![About the Victim](static/screenshots/victim_modal.png) | ![Character Profile](static/screenshots/profile_modal.png) | ![Victory](static/screenshots/verdict_victory.png) |
 
 ---
 
-## 📖 Příběh: *Smrt v cloudu*
+## 📖 Story: *Death in the Cloud*
 
-> **Místo činu:** Kanceláře a serverovna startupu **Nexus AI**  
-> **Oběť:** **Viktor Černý** (CEO) — nalezen mrtvý v noci v serverovně, uškrcený ethernetovým kabelem.  
-> **Pozadí případu:** Viktor Černý vybudoval úspěšný AI startup, ale krátce před smrtí oznámil plán prodat celou společnost velké korporaci a po akvizici propustit většinu týmu. Každý z přítomných měl silný motiv.
+> **Crime Scene:** Offices and server room of the **Nexus AI** startup  
+> **Victim:** **Viktor Černý** (CEO) — found dead at night in the server room, strangled with an Ethernet cable.  
+> **Case Background:** Viktor Černý built a successful AI startup, but shortly before his death he announced a plan to sell the entire company to a large corporation and lay off most of the team after the acquisition. Everyone present had a strong motive.
 
-### Podezřelí
+### Suspects
 
-| ID | Jméno | Role ve firmě | Charakteristika a motiv |
+| ID | Name | Role at the Company | Characteristics & Motive |
 | :--- | :--- | :--- | :--- |
-| `marek` | **Marek Kříž** | Spoluzakladatel & CTO | S Viktorem firmu před 10 lety založil v garáži. Prodej firmy by zničil jeho životní práci. Chladný, technický, odkazuje se na alibi v Git commit logu (`23:15`). |
-| `jana` | **Jana Horáková** | Hlavní vývojářka | Ve firmě je 7 let od dob stáže. Viktor ji extrémně přetěžoval, nutil pracovat po nocích a upíral jí slíbený podíl. Vyhořelá, mluví v metaforách o kódu. |
-| `petr` | **Petr Vacek** | Seed investor | Do Nexus AI vložil veškerý svůj kapitál (Viktor mu dlužil 5 milionů Kč a peníze utrácel za luxusní auta). Výbušný, orientovaný na peníze a ROI, v noci čekal před budovou. |
+| `marek` | **Marek Kříž** | Co-founder & CTO | Founded the company with Viktor 10 years ago in a garage. Selling the company would destroy his life's work. Cold, technical, references an alibi in the Git commit log (`23:15`). |
+| `jana` | **Jana Horáková** | Lead Developer | Has been at the company for 7 years since her internship. Viktor severely overworked her, forced her to work nights, and denied her promised equity. Burned out, speaks in code metaphors. |
+| `petr` | **Petr Vacek** | Seed Investor | Invested all his capital into Nexus AI (Viktor owed him 5 million CZK and was spending money on luxury cars). Hot-tempered, focused on money and ROI, waited outside the building at night. |
 
 ---
 
-## Klíčové funkce
+## Key Features
 
-- **Dynamické AI výslechy v přirozeném jazyce:** Postavy odpovídají česky v první osobě bez rušivých roleplay poznámek, drží se své povahy a znají vzájemné vztahy.
-- **Perzistentní paměť rozhovorů:** Veškerá historie zpráv pro každou postavu se ukládá do relační databáze PostgreSQL a při každém dalším dotazu se předává LLM modelu jako kontext.
-- **Odolnost vůči výpadkům (Graceful Fallback):** Při nedostupnosti AI endpointu nebo chybě API klíče aplikace nespadne, ale vrátí bezpečnou fallback zprávu a informuje uživatele ve stavovém řádku.
-- **Automatický seeding a migrace schématu:** Při startu aplikace (`on_startup`) probíhá automatické napojení na databázi (s retry mechanismem), vytvoření tabulek, zpětně kompatibilní úprava sloupců a inicializace podezřelých.
-- **Systém finálního rozsudku a auto-reset hry:** Hráč může kdykoliv vznést finální obvinění (`/verdict`). Aplikace vyhodnotí, zda byl odhalen skutečný pachatel, zobrazí dramatický verdikt a automaticky vyčistí hru pro novou partii.
-- **Moderní responzivní UI:** Tmavý detektivní design postavený na **Tailwind CSS** s indikátorem psaní (*„Marek Kříž píše...“*), přepínáním výslechových místností a modálními okny.
+- **Dynamic AI Interrogations in Natural Language:** Characters respond in Czech in the first person without distracting roleplay notes, stay in character, and are aware of their mutual relationships.
+- **Persistent Conversation Memory:** The entire message history for each character is stored in a PostgreSQL relational database and passed to the LLM as context on every subsequent query.
+- **Outage Resilience (Graceful Fallback):** If the AI endpoint is unavailable or an API key error occurs, the application does not crash; instead, it returns a safe fallback message and informs the user in the status bar.
+- **Automatic Seeding and Schema Migration:** On application startup (`on_startup`), it automatically connects to the database (with a retry mechanism), creates tables, applies backward-compatible column updates, and initializes the suspects.
+- **Final Verdict System and Game Auto-Reset:** The player can make a final accusation at any time (`/verdict`). The application evaluates whether the true culprit was identified, displays a dramatic verdict, and automatically resets the game for a new round.
+- **Modern Responsive UI:** Dark detective-themed design built with **Tailwind CSS**, featuring a typing indicator (*„Marek Kříž píše...“* / *"Marek Kříž is typing..."*), interrogation room switching, and modal windows.
 
 ---
 
-## Struktura projektu
+## Project Structure
 
 ```text
 AiDetectiveFull/
 ├── app/
-│   ├── ai_client.py      # Inicializace asynchronního OpenAI klienta (AsyncOpenAI)
-│   ├── config.py         # Konfigurace aplikace a čtení ENV proměnných přes Pydantic Settings
-│   ├── db.py             # SQLAlchemy 2.0 ORM modely (GameSession, Character, Message) a init_db()
-│   ├── main.py           # FastAPI aplikace, routy, seeding dat a herní logika
-│   └── prompts.py        # Příběhový kontext, pravidla chování AI a systémové prompty postav
+│   ├── ai_client.py      # Initialization of the asynchronous OpenAI client (AsyncOpenAI)
+│   ├── config.py         # Application configuration and ENV variable loading via Pydantic Settings
+│   ├── db.py             # SQLAlchemy 2.0 ORM models (GameSession, Character, Message) and init_db()
+│   ├── main.py           # FastAPI application, routes, data seeding, and game logic
+│   └── prompts.py        # Story context, AI behavior rules, and character system prompts
 ├── static/
-│   ├── screenshots/      # Snímky obrazovky uživatelského rozhraní
-│   └── placeholder.txt   # Drží adresář static ve verzovacím systému
+│   ├── screenshots/      # UI screenshots
+│   └── placeholder.txt   # Keeps the static directory tracked in version control
 ├── templates/
-│   └── index.html        # Kompletní frontend (Jinja2 šablona, Tailwind CSS, Vanilla JS)
-├── Dockerfile            # Definice produkčního obrazu (Python 3.12-slim + uvicorn)
-├── compose.yml           # Orchestrace kontejnerů (FastAPI aplikace + PostgreSQL 16 s healthcheckem)
-└── requirements.txt      # Seznam Python závislostí
+│   └── index.html        # Complete frontend (Jinja2 template, Tailwind CSS, Vanilla JS)
+├── Dockerfile            # Production image definition (Python 3.12-slim + uvicorn)
+├── compose.yml           # Container orchestration (FastAPI app + PostgreSQL 16 with healthcheck)
+└── requirements.txt      # List of Python dependencies
 ```
 
 ---
 
-## 🚀 Spuštění projektu
+## 🚀 Running the Project
 
-Projekt podporuje jak **OpenAI API**, tak jakýkoliv **OpenAI-kompatibilní server** (např. školní/vlastní instanci Ollama, vLLM či LiteLLM s modelem `gemma3:27b`).
+The project supports both the **OpenAI API** and any **OpenAI-compatible server** (e.g., a school/self-hosted Ollama, vLLM, or LiteLLM instance running the `gemma3:27b` model).
 
-### Možnost 1: Spuštění přes Docker Compose (Doporučeno)
+### Option 1: Running with Docker Compose (Recommended)
 
-1. **Naklonujte repozitář:**
+1. **Clone the repository:**
    ```bash
    git clone https://github.com/nedo44/AiDetectiveFull.git
    cd AiDetectiveFull
    ```
 
-2. **Nastavte proměnné prostředí:**
-   Vytvořte v kořenovém adresáři soubor `.env` (nebo proměnné předejte v terminálu):
+2. **Configure environment variables:**
+   Create a `.env` file in the root directory (or pass the variables in your terminal):
    ```env
-   OPENAI_API_KEY=vas_api_klic
+   OPENAI_API_KEY=your_api_key
    OPENAI_BASE_URL=https://kurim.ithope.eu/v1
    OPENAI_MODEL=gemma3:27b
    ```
-   > **Tip:** Pokud chcete použít oficiální OpenAI API, nastavte `OPENAI_BASE_URL=https://api.openai.com/v1` a např. `OPENAI_MODEL=gpt-4o-mini`. Pokud používáte lokální **Ollamu**, nastavte `OPENAI_BASE_URL=http://host.docker.internal:11434/v1` a libovolný `OPENAI_API_KEY=ollama`.
+   > **Tip:** If you want to use the official OpenAI API, set `OPENAI_BASE_URL=https://api.openai.com/v1` and, for example, `OPENAI_MODEL=gpt-4o-mini`. If you are using a local **Ollama** instance, set `OPENAI_BASE_URL=http://host.docker.internal:11434/v1` and any `OPENAI_API_KEY=ollama`.
 
-3. **Spusťte kontejnery:**
+3. **Start the containers:**
    ```bash
    docker compose up --build
    ```
 
-4. **Otevřete aplikaci v prohlížeči:**
-   Přejděte na adresu **[http://localhost:8000](http://localhost:8000)**.
+4. **Open the application in your browser:**
+   Navigate to **[http://localhost:8000](http://localhost:8000)**.
 
 ---
 
-### Možnost 2: Lokální spuštění pro vývoj (bez Dockeru)
+### Option 2: Local Development Setup (without Docker)
 
-1. **Vytvořte a aktivujte virtuální prostředí:**
+1. **Create and activate a virtual environment:**
    ```bash
    python3 -m venv .venv
-   source .venv/bin/activate  # Na Windows: .venv\Scripts\activate
+   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
    pip install -r requirements.txt
    ```
 
-2. **Vytvořte soubor `.env` v kořenové složce:**
+2. **Create a `.env` file in the root directory:**
    ```env
    DATABASE_URL=postgresql+psycopg://kurim:kurim_password@localhost:5432/kurim_mystery
-   OPENAI_API_KEY=vas_api_klic
+   OPENAI_API_KEY=your_api_key
    OPENAI_BASE_URL=https://kurim.ithope.eu/v1
    OPENAI_MODEL=gemma3:27b
    APP_TITLE=Kurim Mystery
    ```
 
-3. **Spusťte vývojový server Uvicorn:**
+3. **Start the Uvicorn development server:**
    ```bash
    uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
    ```
 
 ---
 
-## Konfigurační proměnné (`.env`)
+## Configuration Variables (`.env`)
 
-| Proměnná | Výchozí hodnota | Popis |
+| Variable | Default Value | Description |
 | :--- | :--- | :--- |
-| `DATABASE_URL` | *(povinné)* | Připojovací řetězec k PostgreSQL databázi (`postgresql+psycopg://...`) |
-| `OPENAI_API_KEY` | *(povinné)* | API klíč pro autentizaci vůči AI serveru |
-| `OPENAI_BASE_URL` | `https://kurim.ithope.eu/v1` | URL adresa OpenAI-kompatibilního API endpointu |
-| `OPENAI_MODEL` | `gemma3:27b` | Název jazykového modelu použitého pro generování odpovědí |
-| `APP_TITLE` | `Kurim Mystery` | Název aplikace zobrazovaný v hlavičce a titulku stránky |
-| `PORT` | `8000` | Port, na kterém naslouchá Uvicorn server v Docker kontejneru |
+| `DATABASE_URL` | *(required)* | PostgreSQL database connection string (`postgresql+psycopg://...`) |
+| `OPENAI_API_KEY` | *(required)* | API key for authenticating with the AI server |
+| `OPENAI_BASE_URL` | `https://kurim.ithope.eu/v1` | URL of the OpenAI-compatible API endpoint |
+| `OPENAI_MODEL` | `gemma3:27b` | Name of the language model used for generating responses |
+| `APP_TITLE` | `Kurim Mystery` | Application title displayed in the header and page title |
+| `PORT` | `8000` | Port on which the Uvicorn server listens inside the Docker container |
 
 ---
 
-## Přehled REST API Endpointů
+## REST API Endpoints Overview
 
-FastAPI automaticky generuje interaktivní OpenAPI dokumentaci dostupnou na `/docs` (Swagger UI) a `/redoc`.
+FastAPI automatically generates interactive OpenAPI documentation available at `/docs` (Swagger UI) and `/redoc`.
 
-| Metoda | Endpoint | Popis |
+| Method | Endpoint | Description |
 | :--- | :--- | :--- |
-| `GET` | `/` | Vykreslí hlavní HTML rozhraní hry (`templates/index.html`) se seznamem podezřelých. |
-| `GET` | `/api/state` | Vrátí JSON s aktuální herní relací, seznamem postav a aktivním podezřelým. |
-| `GET` | `/api/profile/{suspect_id}` | Vrátí detailní profil a popis vybrané postavy (`marek`, `jana`, `petr`). |
-| `GET` | `/api/history/{suspect_id}` | Vrátí chronologicky seřazenou historii výslechu dané postavy. |
-| `POST` | `/api/chat` | Přijme formulářová data (`suspect_id`, `message`), uloží dotaz do DB, zavolá LLM s celou historií a uloží odpověď. |
-| `POST` | `/verdict` | Přijme JSON `{"accused_name": "..."}`, vyhodnotí správnost obvinění, vrátí výsledek a vyresetuje hru pro novou partii. |
+| `GET` | `/` | Renders the main HTML game interface (`templates/index.html`) with the list of suspects. |
+| `GET` | `/api/state` | Returns JSON with the current game session, list of characters, and active suspect. |
+| `GET` | `/api/profile/{suspect_id}` | Returns the detailed profile and description of the selected character (`marek`, `jana`, `petr`). |
+| `GET` | `/api/history/{suspect_id}` | Returns the chronologically ordered interrogation history of the given character. |
+| `POST` | `/api/chat` | Accepts form data (`suspect_id`, `message`), saves the query to the DB, calls the LLM with full history, and saves the response. |
+| `POST` | `/verdict` | Accepts JSON `{"accused_name": "..."}`, evaluates the accusation, returns the result, and resets the game for a new round. |
 
 ---
 
-## Použité technologie
+## Technologies Used
 
 - **Backend:** [FastAPI](https://fastapi.tiangolo.com/), [Uvicorn](https://www.uvicorn.org/), Python 3.12
-- **Databáze & ORM:** [PostgreSQL 16](https://www.postgresql.org/), [SQLAlchemy 2.0](https://www.sqlalchemy.org/), `psycopg` (v3)
-- **AI Integrace:** [OpenAI Python SDK](https://github.com/openai/openai-python) (`AsyncOpenAI`), Pydantic Settings
+- **Database & ORM:** [PostgreSQL 16](https://www.postgresql.org/), [SQLAlchemy 2.0](https://www.sqlalchemy.org/), `psycopg` (v3)
+- **AI Integration:** [OpenAI Python SDK](https://github.com/openai/openai-python) (`AsyncOpenAI`), Pydantic Settings
 - **Frontend:** HTML5, [Jinja2](https://jinja.palletsprojects.com/), [Tailwind CSS](https://tailwindcss.com/), Vanilla JavaScript (ES6+)
-- **Infrastruktura:** Docker, Docker Compose
+- **Infrastructure:** Docker, Docker Compose
