@@ -1,6 +1,6 @@
 # Kurim Mystery - Interactive AI Detective Game
 
-[![Zobrazit README v češtině](https://img.shields.io/badge/%F0%9F%87%A8%F0%9F%87%BF_%C4%8Cesky-Zobrazit_README_v_%C4%8CJ-2563EB?style=for-the-badge)](README.cs.md)
+[(https://img.shields.io/badge/%F0%9F%87%A8%F0%9F%87%BF_%C4%8Cesky-Zobrazit_README_v_%C4%8CJ-2563EB?style=for-the-badge)](README.cs.md)
 
 This project was created as a high school graduation (*maturita*) project for the Operating Systems course.
 
