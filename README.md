@@ -1,4 +1,5 @@
 #Kurim Mystery - Interaktivní AI Detektivka
+
 Tento projekt byl vytvořen jako maturitní projekt do předmětu operační systémy.
 
 ![Python](https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python&logoColor=white)
