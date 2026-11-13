@@ -50,57 +50,6 @@
 
 ---
 
-## 🏗️ Architektura a datový model
-
-```mermaid
-flowchart LR
-    Browser["Webový prohlížeč\n(Jinja2 + Tailwind CSS + Fetch API)"]
-    FastAPI["FastAPI Backend\n(app/main.py)"]
-    DB[("PostgreSQL 16\n(SQLAlchemy 2.0 ORM)")]
-    LLM["OpenAI-Compatible API\n(Gemma 3 / OpenAI / Ollama)"]
-
-    Browser <-->|"GET / , /api/history, /api/profile\nPOST /api/chat, /verdict"| FastAPI
-    FastAPI <-->|"Čtení a ukládání relací,\npostav a historie zpráv"| DB
-    FastAPI <-->|"AsyncOpenAI\n(system_prompt + kontext)"| LLM
-```
-
-### Databázové schéma (`app/db.py`)
-
-```mermaid
-erDiagram
-    GAME_SESSIONS ||--o{ CHARACTERS : "obsahuje"
-    GAME_SESSIONS ||--o{ MESSAGES : "eviduje"
-    CHARACTERS ||--o{ MESSAGES : "vede rozhovor"
-
-    GAME_SESSIONS {
-        int id PK
-         varchar(120) name
-        timestamptz created_at
-        timestamptz updated_at
-    }
-    CHARACTERS {
-        int id PK
-        int game_session_id FK
-        varchar(40) suspect_id UK
-        varchar(120) name
-        varchar(40) role
-        varchar(40) secret_role
-        text description
-        text system_prompt
-        timestamptz created_at
-    }
-    MESSAGES {
-        int id PK
-        int game_session_id FK
-        int character_id FK
-        varchar(20) sender
-        text content
-        timestamptz created_at
-    }
-```
-
----
-
 ## 📂 Struktura projektu
 
 ```text
